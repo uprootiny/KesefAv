@@ -19,6 +19,36 @@
             "name": "CNBC",
             "url": "https://www.cnbc.com/world/?region=world",
             "selector": ".LatestNews-headline"
+        },
+        {
+            "name": "Seeking Alpha",
+            "url": "https://seekingalpha.com/market-news",
+            "selector": ".title"
+        },
+        {
+            "name": "The Motley Fool",
+            "url": "https://www.fool.com/investing-news/",
+            "selector": ".title"
+        },
+        {
+            "name": "Yahoo Finance",
+            "url": "https://finance.yahoo.com/news/",
+            "selector": "h3"
+        },
+        {
+            "name": "ZeroHedge",
+            "url": "https://www.zerohedge.com/",
+            "selector": "h2"
+        },
+        {
+            "name": "Finextra",
+            "url": "https://www.finextra.com/news/latestnews.aspx",
+            "selector": "h2"
+        },
+        {
+            "name": "CoinDesk",
+            "url": "https://www.coindesk.com/",
+            "selector": "h4"
         }
     ]
 }

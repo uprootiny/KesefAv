@@ -3,6 +3,7 @@ import yfinance as yf
 import json
 from newsrag import get_news_sentiment_and_relevance
 from tabular_output import display_data_with_sentiment
+from indicators import calculate_indicators
 
 def fetch_market_data(ticker, start_date, end_date):
     try:
@@ -28,11 +29,13 @@ def main():
         for company, ticker in stocks.items():
             market_data = fetch_market_data(ticker, start_date, end_date)
             if market_data is not None:
-                keywords = [company, ticker, category]  # Customize keywords as needed
-                news_sentiments = get_news_sentiment_and_relevance(keywords)
-                
-                if news_sentiments:
-                    display_data_with_sentiment(market_data, news_sentiments, company, ticker)
+                indicators = calculate_indicators(market_data)
+                if not indicators.empty:
+                    keywords = [company, ticker, category]
+                    news_sentiments = get_news_sentiment_and_relevance(keywords)
+                    
+                    if news_sentiments:
+                        display_data_with_sentiment(indicators, news_sentiments, company, ticker)
 
 if __name__ == "__main__":
     main()
