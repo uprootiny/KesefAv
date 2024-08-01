@@ -1,7 +1,8 @@
 import pandas as pd
 import yfinance as yf
 import json
-from news_analysis import get_news_sentiment
+from newsrag import get_news_sentiment_and_relevance
+from tabular_output import display_data_with_sentiment
 
 def fetch_market_data(ticker, start_date, end_date):
     data = yf.download(ticker, start=start_date, end=end_date)
@@ -22,15 +23,10 @@ def main():
         print(f"Category: {category}")
         for company, ticker in stocks.items():
             market_data = fetch_market_data(ticker, start_date, end_date)
-            print(f"Market data for {company} ({ticker}):")
-            print(market_data.head())
-    
             keywords = [company, ticker, category]  # Customize keywords as needed
-            news_sentiments = get_news_sentiment(keywords)
-            print(f"Sentiment analysis for {company}:")
-            for article, sentiment in news_sentiments.items():
-                print(f"Article: {article}")
-                print(f"Sentiment: {sentiment}")
+            news_sentiments = get_news_sentiment_and_relevance(keywords)
+            
+            display_data_with_sentiment(market_data, news_sentiments, company, ticker)
 
 if __name__ == "__main__":
     main()
