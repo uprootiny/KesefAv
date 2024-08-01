@@ -5,8 +5,12 @@ from newsrag import get_news_sentiment_and_relevance
 from tabular_output import display_data_with_sentiment
 
 def fetch_market_data(ticker, start_date, end_date):
-    data = yf.download(ticker, start=start_date, end=end_date)
-    return data
+    try:
+        data = yf.download(ticker, start=start_date, end=end_date)
+        return data
+    except Exception as e:
+        print(f"Error fetching market data for {ticker}: {e}")
+        return None
 
 def read_tickers(file_path):
     with open(file_path, 'r') as file:
@@ -23,10 +27,12 @@ def main():
         print(f"Category: {category}")
         for company, ticker in stocks.items():
             market_data = fetch_market_data(ticker, start_date, end_date)
-            keywords = [company, ticker, category]  # Customize keywords as needed
-            news_sentiments = get_news_sentiment_and_relevance(keywords)
-            
-            display_data_with_sentiment(market_data, news_sentiments, company, ticker)
+            if market_data is not None:
+                keywords = [company, ticker, category]  # Customize keywords as needed
+                news_sentiments = get_news_sentiment_and_relevance(keywords)
+                
+                if news_sentiments:
+                    display_data_with_sentiment(market_data, news_sentiments, company, ticker)
 
 if __name__ == "__main__":
     main()
