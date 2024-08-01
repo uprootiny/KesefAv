@@ -1,0 +1,30 @@
+{
+    "Biotech": {
+      "Halozyme Therapeutics": "HALO",
+      "United Therapeutics": "UTHR",
+      "Vertex Pharmaceuticals": "VRTX",
+      "Ligand Pharmaceuticals": "LGND",
+      "Corcept Therapeutics": "CORT"
+    },
+    "Ecotech/Green": {
+      "Hillcrest Energy Technologies": "HET",
+      "GreenPower Motor Company": "GP",
+      "UGE International": "UGE",
+      "Else Nutrition Holdings": "ELSE",
+      "Surf Air Mobility": "SAM"
+    },
+    "Agriculture": {
+      "Archer-Daniels-Midland": "ADM",
+      "Bayer": "BAYN",
+      "Bunge": "BG",
+      "Scotts Miracle-Gro": "SMG",
+      "Corteva, Inc": "CTVA",
+      "Nutrien": "NTR",
+      "FMC Corp.": "FMC",
+      "Tyson Foods": "TSN"
+    },
+    "Israeli Non-Defense Sector": {
+      "Playtika": "PLTK"
+    }
+  }
+  
