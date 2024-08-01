@@ -1,0 +1,9 @@
+data/
+kesef-av-env/
+*.pyc
+__pycache__/
+.DS_Store
+kesef-av-env/
+*.pyc
+__pycache__/
+.DS_Store
