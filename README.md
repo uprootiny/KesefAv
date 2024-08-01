@@ -1,11 +1,12 @@
 # INSTALL.md
 
+```
 python -m venv kesef-av-env
 source kesef-av-env/bin/activate
 pip install yfinance ta pandas sentence-transformers beautifulsoup4 requests vaderSentiment
 
 python takethree/main.py
-
+```
 
 # Expected output:
 
