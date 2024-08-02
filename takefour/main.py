@@ -1,5 +1,5 @@
 from data_retrieval import fetch_most_traded_tickers, organize_tickers
-from sentiment_analysis import analyze_sentiments
+from sentiment_analysis import analyze_sentiments  # Ensure this module does not use fetch_most_traded_tickers
 from volatility_analysis import analyze_volatility
 from alert_system import alert_system
 
