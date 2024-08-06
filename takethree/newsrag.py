@@ -32,7 +32,8 @@ def filter_relevant_articles(articles, keywords, model):
     article_embeddings = embeddings[:-1]
     
     cosine_scores = util.pytorch_cos_sim(keyword_embedding, article_embeddings).flatten()
-    relevant_indices = cosine_scores.argsort(descending=True)[:3]  # Top 3 relevant articles
+    srtd = cosine_scores.argsort(descending=True)
+    relevant_indices = srtd[:min(12, len(srtd))]  # Top 3 relevant articles
     
     relevant_articles = [(articles[i], cosine_scores[i].item()) for i in relevant_indices]
     
@@ -47,8 +48,11 @@ def get_news_sentiment_and_relevance(keywords):
     
     all_articles = []
     for source in sources:
+        print(f"--- processing source {source['url']}")
         try:
             articles = fetch_news_articles(source['url'], source['selector'])
+            print(f"--- processing source {source['url']}. fetched {len(articles)}")
+
             all_articles.extend(articles)
         except Exception as e:
             print(f"Error fetching articles from {source['name']} ({source['url']}): {e}")
@@ -65,7 +69,6 @@ def get_news_sentiment_and_relevance(keywords):
             "company": company,
             "ticker": ticker,
             'category': category
-
         }
     
     return sentiments
