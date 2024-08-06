@@ -22,7 +22,7 @@ def read_tickers(file_path):
 def main():
     start_date = '2023-01-01'
     end_date = '2024-01-01'
-    tickers = read_tickers('stock_list.json')
+    tickers = read_tickers('cfg_stock_list.json')
     
     for category, stocks in tickers.items():
         print(f"Category: {category}")
@@ -38,4 +38,21 @@ def main():
                         display_data_with_sentiment(indicators, news_sentiments, company, ticker)
 
 if __name__ == "__main__":
+    from pathlib import Path
+
+    # import requests
+    # import logging
+    # from http.client import HTTPConnection  # py3
+
+    # log = logging.getLogger('urllib3')
+    # log.setLevel(logging.DEBUG)
+
+    # # logging from urllib3 to console
+    # ch = logging.StreamHandler()
+    # ch.setLevel(logging.DEBUG)
+    # log.addHandler(ch)
+
+    # # print statements from `http.client.HTTPConnection` to console/stdout
+    # HTTPConnection.debuglevel = 1
+
     main()

@@ -3,7 +3,9 @@
 ```
 python -m venv kesef-av-env
 source kesef-av-env/bin/activate
-pip install yfinance ta pandas sentence-transformers beautifulsoup4 requests vaderSentiment
+pip install yfinance ta pandas sentence-transformers beautifulsoup4 requests vaderSentiment 
+
+pip install sqlalchemy psycopg2-binary
 
 python takethree/main.py
 ```
@@ -59,3 +61,13 @@ Sentiment analysis for United Therapeutics:
 Article: Analyst Report: Bread Financial Holdings, Inc.
 Relevance Score: 0.21
 Sentiment: {'neg': 0.0, 'neu': 1.0, 'pos': 0.0, 'compound': 0.0}
+
+
+```
+,
+        {
+            "name": "CoinDesk",
+            "url": "https://www.coindesk.com/",
+            "selector": "h4"
+        }
+```

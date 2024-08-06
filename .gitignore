@@ -7,3 +7,5 @@ kesef-av-env/
 *.pyc
 __pycache__/
 .DS_Store
+__*
+db_sam.py

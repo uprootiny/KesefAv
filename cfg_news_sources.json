@@ -1,11 +1,6 @@
 {
     "sources": [
         {
-            "name": "MarketWatch",
-            "url": "https://www.marketwatch.com/latest-news",
-            "selector": ".article__headline"
-        },
-        {
             "name": "BBC",
             "url": "https://www.bbc.com/news",
             "selector": "h3"
@@ -46,9 +41,9 @@
             "selector": "h2"
         },
         {
-            "name": "CoinDesk",
-            "url": "https://www.coindesk.com/",
-            "selector": "h4"
+            "name": "MarketWatch",
+            "url": "https://www.marketwatch.com/latest-news",
+            "selector": ".article__headline"
         }
     ]
 }

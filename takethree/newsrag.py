@@ -4,8 +4,12 @@ from sentence_transformers import SentenceTransformer, util
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import json
 
+url_holder = {}
 # Fetch news articles from a given URL
 def fetch_news_articles(url, selector):
+    if url in url_holder:
+        return url_holder[url]
+    
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     
@@ -13,7 +17,7 @@ def fetch_news_articles(url, selector):
     for item in soup.select(selector):
         title = item.get_text().strip()
         articles.append(title)
-    
+    url_holder[url] = articles
     return articles
 
 # Analyze sentiment of a given text
@@ -32,7 +36,8 @@ def filter_relevant_articles(articles, keywords, model):
     article_embeddings = embeddings[:-1]
     
     cosine_scores = util.pytorch_cos_sim(keyword_embedding, article_embeddings).flatten()
-    relevant_indices = cosine_scores.argsort(descending=True)[:3]  # Top 3 relevant articles
+    srtd = cosine_scores.argsort(descending=True)
+    relevant_indices = srtd[:min(12, len(srtd))]  # Top 3 relevant articles
     
     relevant_articles = [(articles[i], cosine_scores[i].item()) for i in relevant_indices]
     
@@ -40,15 +45,18 @@ def filter_relevant_articles(articles, keywords, model):
 
 # Get news sentiment and relevant articles
 def get_news_sentiment_and_relevance(keywords):
-    with open('news_sources.json', 'r') as file:
+    with open('cfg_news_sources.json', 'r') as file:
         sources = json.load(file)['sources']
-    
+    company, ticker, category = keywords
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
     
     all_articles = []
     for source in sources:
+        print(f"--- processing source {source['url']}")
         try:
             articles = fetch_news_articles(source['url'], source['selector'])
+            print(f"--- processing source {source['url']}. fetched {len(articles)}")
+
             all_articles.extend(articles)
         except Exception as e:
             print(f"Error fetching articles from {source['name']} ({source['url']}): {e}")
@@ -60,7 +68,11 @@ def get_news_sentiment_and_relevance(keywords):
         sentiment = analyze_sentiment(article)
         sentiments[article] = {
             "sentiment": sentiment,
-            "relevance_score": score
+            "relevance_score": score,
+            "url": source['url'],
+            "company": company,
+            "ticker": ticker,
+            'category': category
         }
     
     return sentiments
