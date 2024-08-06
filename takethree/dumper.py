@@ -1,6 +1,8 @@
 
 import pandas as pd
 from pathlib import Path
+import json
+
 
 def dump_to_table(table_name):
     engine = create_engine(
@@ -20,16 +22,7 @@ def dump_to_table(table_name):
     cur.close()
     conn.close()
 
-def dump_json():
-    # filename = f"{sha_id}.json"
-    filename = "block.json"
-    filepath = f"__data/{filename}"
-    # Path(filepath).wr(json.dumps(article_info))
-    filepath = f"__data/{filename}"
-    item =  json.dumps(article_info)
-    line_item = f"- {item}\n"
-    with open(filepath, "a") as fd:
-        fd.write(line_item)    
+
 
 
 class Dumper:
@@ -49,6 +42,16 @@ class Dumper:
         csv_path = str(filepath)
         df_indi.to_csv(csv_path, sep=',')
 
+    def dump_article_yaml(self, article_info):
+        # sha_id = sha256(article_info['content'].encode('utf-8')).hexdigest()
+        # filename = f"{sha_id}.json"
+        filename = f"senti_ALL.list.yaml"
+        filepath = Path(self.workdir) / filename
+        item =  json.dumps(article_info)
+        line_item = f"- {item}\n"
+        with open(filepath, "a") as fd:
+            fd.write(line_item)   
+ 
 __dumper_store = []    
 
 def get_Dumper() -> Dumper:

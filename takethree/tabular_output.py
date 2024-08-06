@@ -30,18 +30,8 @@ def display_sentiment_analysis(news_sentiments, company):
         article_info['relevance_score'] = info['relevance_score']
         # eprint(json.dumps(article_info))
         sha_id = sha256(article_info['content'].encode('utf-8')).hexdigest()
-        
         article_info['sha_id'] = sha_id
-        # filename = f"{sha_id}.json"
-        filename = "block.json"
-        filepath = f"__data/{filename}"
-        # Path(filepath).wr(json.dumps(article_info))
-        filepath = f"__data/{filename}"
-        item =  json.dumps(article_info)
-        line_item = f"- {item}\n"
-        with open(filepath, "a") as fd:
-            fd.write(line_item)
-
+        dmpr.dump_article_yaml(article_info)
     print("\n")
 
 def display_data_with_sentiment(indicators, news_sentiments, company, ticker):
