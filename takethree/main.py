@@ -22,7 +22,7 @@ def read_tickers(file_path):
 def main():
     start_date = '2023-01-01'
     end_date = '2024-01-01'
-    tickers = read_tickers('stock_list.json')
+    tickers = read_tickers('cfg_stock_list.json')
     
     for category, stocks in tickers.items():
         print(f"Category: {category}")

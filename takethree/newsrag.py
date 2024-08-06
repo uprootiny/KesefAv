@@ -40,7 +40,7 @@ def filter_relevant_articles(articles, keywords, model):
 
 # Get news sentiment and relevant articles
 def get_news_sentiment_and_relevance(keywords):
-    with open('news_sources.json', 'r') as file:
+    with open('cfg_news_sources.json', 'r') as file:
         sources = json.load(file)['sources']
     
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
