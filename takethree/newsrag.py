@@ -42,7 +42,7 @@ def filter_relevant_articles(articles, keywords, model):
 def get_news_sentiment_and_relevance(keywords):
     with open('cfg_news_sources.json', 'r') as file:
         sources = json.load(file)['sources']
-    
+    company, ticker, category = keywords
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
     
     all_articles = []
@@ -60,7 +60,12 @@ def get_news_sentiment_and_relevance(keywords):
         sentiment = analyze_sentiment(article)
         sentiments[article] = {
             "sentiment": sentiment,
-            "relevance_score": score
+            "relevance_score": score,
+            "url": source['url'],
+            "company": company,
+            "ticker": ticker,
+            'category': category
+
         }
     
     return sentiments
