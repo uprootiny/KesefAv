@@ -3,33 +3,19 @@ import sys
 import json
 from pathlib import Path
 from hashlib import sha256
-
-
+import pandas as pd
+import dumper
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
-def dump_to_table():
-    engine = create_engine(
-    'postgresql+psycopg2://username:password@host:port/database')
+dmpr = dumper.get_Dumper()
 
-    # Drop old table and create new empty table
-    df.head(0).to_sql('table_name', engine, if_exists='replace',index=False)
-
-    conn = engine.raw_connection()
-    cur = conn.cursor()
-    output = io.StringIO()
-    df.to_csv(output, sep='\t', header=False, index=False)
-    output.seek(0)
-    contents = output.getvalue()
-    cur.copy_from(output, 'table_name', null="") # null values become ''
-    conn.commit()
-    cur.close()
-    conn.close()
-
-
-def display_market_data(indicators, company, ticker):
+def display_market_data(indicators: pd.DataFrame, company, ticker):
     print(f"Market data for {company} ({ticker}):")
-    print(indicators[['Open', 'High', 'Low', 'Close', 'RSI', 'SMA', 'EMA', 'MACD', 'MACD Signal']].head())
+    df_indi: pd.DataFrame = indicators[['Open', 'High', 'Low', 'Close', 'RSI', 'SMA', 'EMA', 'MACD', 'MACD Signal']]
+    print(df_indi.tail())
+    dmpr.dump_indicators(ticker, df_indi)
+    print(f"dumped {ticker}")
 
 def display_sentiment_analysis(news_sentiments, company):
     article_info = {}
