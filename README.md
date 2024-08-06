@@ -3,7 +3,9 @@
 ```
 python -m venv kesef-av-env
 source kesef-av-env/bin/activate
-pip install yfinance ta pandas sentence-transformers beautifulsoup4 requests vaderSentiment
+pip install yfinance ta pandas sentence-transformers beautifulsoup4 requests vaderSentiment 
+
+pip install sqlalchemy psycopg2-binary
 
 python takethree/main.py
 ```

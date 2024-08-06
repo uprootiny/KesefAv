@@ -6,3 +6,5 @@ sentence-transformers
 beautifulsoup4
 requests
 vaderSentiment
+sqlalchemy
+psycopg2-binary

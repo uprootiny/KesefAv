@@ -10,3 +10,8 @@ tasks:
     cmds:
       - echo "{{.GREETING}}"
     silent: true
+
+  run:
+    desc: run fitgpt demo
+    cmds:
+    - python takethree/main.py

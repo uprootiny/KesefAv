@@ -38,4 +38,7 @@ def main():
                         display_data_with_sentiment(indicators, news_sentiments, company, ticker)
 
 if __name__ == "__main__":
+    from pathlib import Path
+    Path("__data").mkdir(exist_ok=True)
+
     main()
