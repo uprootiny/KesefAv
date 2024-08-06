@@ -39,6 +39,20 @@ def main():
 
 if __name__ == "__main__":
     from pathlib import Path
-    Path("__data").mkdir(exist_ok=True)
+
+    # import requests
+    # import logging
+    # from http.client import HTTPConnection  # py3
+
+    # log = logging.getLogger('urllib3')
+    # log.setLevel(logging.DEBUG)
+
+    # # logging from urllib3 to console
+    # ch = logging.StreamHandler()
+    # ch.setLevel(logging.DEBUG)
+    # log.addHandler(ch)
+
+    # # print statements from `http.client.HTTPConnection` to console/stdout
+    # HTTPConnection.debuglevel = 1
 
     main()
