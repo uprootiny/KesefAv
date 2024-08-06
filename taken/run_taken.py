@@ -20,6 +20,10 @@ def fetch_and_persit_ticker(ticker, start_date, end_date):
     # persistor.persist(indicators)
 
 def fetch_and_persist_news(ticker="", company="", category=""):
+    
+    cf_ticker = conf_tickers.ConfTicker()
+    company = cf_ticker.tickers_flat[ticker]['company']
+    category = cf_ticker.tickers_flat[ticker]['category']
 
     bri = fetch_news.FetchNews()
     all_articles: List[dict] = bri.get_all_articles()
@@ -37,21 +41,12 @@ def fetch_and_persist_news(ticker="", company="", category=""):
     dumper.dump_sentiment_analysis(sentiments,company,category)
 
 def main():
-    # print(f"{cf_ticker.tickers_flat}")
     ticker = 'PLTK'
-    
-    cf_ticker = conf_tickers.ConfTicker()
-    company = cf_ticker.tickers_flat[ticker]['company']
-    category = cf_ticker.tickers_flat[ticker]['category']
-
-    fetch_and_persist_news(
-        ticker=ticker, 
-        company=company, 
-        category=category)
+    fetch_and_persist_news(ticker=ticker)
     # -----
     start_date = '2023-01-01'
     end_date = '2024-01-01'
-    fetch_and_persist_news('ticker', start_date, end_date)
+    fetch_and_persit_ticker(ticker, start_date, end_date)
 
 
 if __name__ == "__main__":
