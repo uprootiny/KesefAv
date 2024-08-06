@@ -4,8 +4,12 @@ from sentence_transformers import SentenceTransformer, util
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import json
 
+url_holder = {}
 # Fetch news articles from a given URL
 def fetch_news_articles(url, selector):
+    if url in url_holder:
+        return url_holder[url]
+    
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     
@@ -13,7 +17,7 @@ def fetch_news_articles(url, selector):
     for item in soup.select(selector):
         title = item.get_text().strip()
         articles.append(title)
-    
+    url_holder[url] = articles
     return articles
 
 # Analyze sentiment of a given text
