@@ -1,0 +1,3 @@
+creation_rules:
+  - encrypted_regex: '^(api_keys)$'
+    pgp: "3E0981F6DFADE7466281197588C90B43F079F35D"
