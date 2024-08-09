@@ -58,3 +58,33 @@ Sentiment analysis for United Therapeutics:
 Article: Analyst Report: Bread Financial Holdings, Inc.
 Relevance Score: 0.21
 Sentiment: {'neg': 0.0, 'neu': 1.0, 'pos': 0.0, 'compound': 0.0}
+
+
+
+
+
+
+# Using API keys encrypted with SOPS:
+
+The keys have been encrypted using SOPS:
+
+sops -e api_keys.json > api_keys.enc.json
+rm api_keys.json
+
+
+Decrypt the file when needed:
+sops -d api_keys.enc.json > api_keys.json
+
+Then use the following in the python code:
+import json
+
+with open('api_keys.json') as f:
+    api_keys = json.load(f)
+
+newsapi_key = api_keys['newsapi']
+newsdata_key = api_keys['newsdata']
+
+# Encrypting:
+sops -e api_keys.json > api_keys.enc.json
+# Decrypting:
+sops -d api_keys.enc.json > api_keys.json
